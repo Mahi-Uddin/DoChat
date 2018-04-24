@@ -1,0 +1,51 @@
+{
+  "name": "dochat",
+  "version": "1.0.0",
+  "description": "An open source and simple chat application built with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "install-app-deps",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "cf.zihad.dochat",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "maintainer": "Zihad"
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
+  },
+  "author": {
+    "name": "Zihad",
+    "email": "zihadmahiuddin@gmail.com"
+  },
+  "homepage": "http://github.com/Mahi-Uddin/DoChat",
+  "dependencies": {
+    "mongoose": "^5.0.16"
+  },
+  "devDependencies": {
+    "electron-builder": "^20.10.0"
+  }
+}

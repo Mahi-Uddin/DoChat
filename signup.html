@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Login - DoChat!</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/login.css" />
+	<script src="accountManager.js"></script>
+	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+</head>
+
+<body>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<a href="index.html" class="logo">
+				<strong>DoChat</strong>
+			</a>
+		</header>
+	</div>
+
+	<!-- Login Form -->
+	<section id="login">
+		<div class="inner">
+			<section>
+				<div class="field half first">
+					<label for="name" class="center-aligned-label">Full Name</label>
+					<input type="text" name="name" id="name" class="center-aligned-input" />
+                </div>
+                <div class="field half">
+					<label for="name" class="center-aligned-label">Email</label>
+					<input type="text" name="email" id="email" class="center-aligned-input" />
+                </div>
+                <div class="field half">
+					<label for="name" class="center-aligned-label">Username</label>
+					<input type="text" name="username" id="username" class="center-aligned-input" />
+				</div>
+				<div class="field half">
+					<label for="email" class="center-aligned-label">Password</label>
+					<input type="password" name="password" id="password" class="center-aligned-input" />
+				</div>
+				<ul class="actions">
+					<li>
+						<input type="submit" value="Sign up" class="special" onclick="signup()" />
+					</li>
+                </ul>
+                <section id="infoMessages">
+					<p></p>
+                </section>
+				<a href="login.html">Already have an account? Click here to login!</a>
+			</section>
+		</div>
+	</section>
+</body>
+
+</html>
