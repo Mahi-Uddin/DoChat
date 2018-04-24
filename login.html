@@ -11,6 +11,23 @@
 	<script src="accountManager.js"></script>
 	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	<script>
+		function handleKeyPress(e){
+			if(e.key == "Enter"){
+				if(document.getElementById('username').value != ''){
+					if(document.getElementById('password').value != ''){
+						login()
+					}
+					else{
+						document.getElementById('infoMessages').getElementsByTagName('p').item(0).innerHTML = 'Password can\'t be empty'
+					}
+				}
+				else{
+					document.getElementById('infoMessages').getElementsByTagName('p').item(0).innerHTML = 'Username can\'t be empty'
+				}
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -32,11 +49,11 @@
 			<section>
 				<div class="field half first">
 					<label for="name" class="center-aligned-label">Username/Email</label>
-					<input type="text" name="email" id="username" class="center-aligned-input" />
+					<input type="text" name="email" id="username" onkeypress="handleKeyPress(event)" class="center-aligned-input" />
 				</div>
 				<div class="field half">
 					<label for="email" class="center-aligned-label">Password</label>
-					<input type="password" name="password" id="password" class="center-aligned-input" />
+					<input type="password" name="password" id="password" onkeypress="handleKeyPress(event)" class="center-aligned-input" />
 				</div>
 				<ul class="actions">
 					<li>

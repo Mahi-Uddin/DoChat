@@ -14,7 +14,10 @@ client.on('data', function(data){
             let messageElement = infoMessages.getElementsByTagName('p').item(0)
             messageElement.innerHTML = params[0]
             console.log(messageElement)
-            // infoMessages.appendChild(messageElement)
+            if(params[0].indexOf('successful') >= 0){
+                window.location.href = 'index.html'
+                
+            }
         }
         break
         default:
