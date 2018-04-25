@@ -9,14 +9,13 @@ client.on('data', function(data){
     let params = strData.split('<s>').slice(1, strData.split('<s>').length)
     switch(packetType){
         case 'logMessage':
-        if(params[0] != 'success'){
+        if(params[0]){
             let infoMessages = document.getElementById('infoMessages')
             let messageElement = infoMessages.getElementsByTagName('p').item(0)
             messageElement.innerHTML = params[0]
             console.log(messageElement)
-            if(params[0].indexOf('successful') >= 0){
+            if (params[0].indexOf('Login successful!') >= 0) {
                 window.location.href = 'index.html'
-                
             }
         }
         break
