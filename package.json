@@ -43,7 +43,8 @@
   },
   "homepage": "http://github.com/Mahi-Uddin/DoChat",
   "dependencies": {
-    "mongoose": "^5.0.16"
+    "mongoose": "^5.0.16",
+    "superagent": "^3.8.2"
   },
   "devDependencies": {
     "electron-builder": "^20.10.0"
