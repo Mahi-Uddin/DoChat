@@ -1,70 +1,89 @@
-let net = require('net')
-const client = new net.Socket()
-let PORT = 1234
-
-client.on('data', function(data){
-    let strData = data.toString()
-    console.log(strData)
-    let packetType = strData.split('<s>')[0]
-    let params = strData.split('<s>').slice(1, strData.split('<s>').length)
-    switch(packetType){
-        case 'logMessage':
-        if(params[0]){
-            let infoMessages = document.getElementById('infoMessages')
-            let messageElement = infoMessages.getElementsByTagName('p').item(0)
-            messageElement.innerHTML = params[0]
-            console.log(messageElement)
-            if (params[0].indexOf('Login successful!') >= 0) {
-                window.location.href = 'index.html'
-            }
-        }
-        break
-        default:
-        console.log('Unknown packet type received', packetType)
-        client.write('Unknown packet type received ' + packetType)
-        break
-    }
-})
-client.on('connect', function(){
-    console.log(`Connected to ${client.remoteAddress}:${client.remotePort}`)
-    setInterval(update, 1000)
-})
-
-function connect(){
-    client.connect(PORT, 'localhost')
-}
-
-function send(){
-    let data = document.getElementById('dataToSend').value
-    client.write(data)
-}
-
-function update(){
-
-}
+const superagent = require('superagent')
+let PORT = 5000
 
 module.exports.login = function login(username, password){
-    let loginPacket = ''
-    loginPacket += 'login'
-    loginPacket += '<s>'
-    loginPacket += username
-    loginPacket += '<s>'
-    loginPacket += password
-    client.write(loginPacket)
+    superagent.get(`http://localhost:5000/api/login/${username}/${password}`, (err, res) => {
+        let strData = res.text
+        console.log(res.text)
+        let packetType = strData.split('<s>')[0]
+        let params = strData.split('<s>').slice(1, strData.split('<s>').length)
+        console.log(packetType)
+        console.log(params)
+        switch (packetType) {
+            case 'logMessage':
+                if (params[0]) {
+                    let infoMessages = document.getElementById('infoMessages')
+                    let messageElement = infoMessages.getElementsByTagName('p').item(0)
+                    messageElement.innerHTML = params[0]
+                    console.log(messageElement)
+                    if (params[0].indexOf('Login successful!') >= 0) {
+                        window.location.href = 'index.html'
+                    }
+                }
+                break
+            default:
+                console.log('Unknown packet type received', packetType)
+                client.write('Unknown packet type received ' + packetType)
+                break
+        }
+    })
 }
 
 module.exports.signup = function signup(fullname, email, username, password){
-    let loginPacket = ''
-    loginPacket += 'signup'
-    loginPacket += '<s>'
-    loginPacket += fullname
-    loginPacket += '<s>'
-    loginPacket += email
-    loginPacket += '<s>'
-    loginPacket += username
-    loginPacket += '<s>'
-    loginPacket += password
-    client.write(loginPacket)
+    superagent.get(`http://localhost:5000/api/signup/${fullname}/${email}/${username}/${password}`, (err, res) => {
+        let strData = res.text
+        console.log(res.text)
+        let packetType = strData.split('<s>')[0]
+        let params = strData.split('<s>').slice(1, strData.split('<s>').length)
+        console.log(packetType)
+        console.log(params)
+        switch (packetType) {
+            case 'logMessage':
+                if (params[0]) {
+                    let infoMessages = document.getElementById('infoMessages')
+                    let messageElement = infoMessages.getElementsByTagName('p').item(0)
+                    messageElement.innerHTML = params[0]
+                    console.log(messageElement)
+                    if (params[0].indexOf('Login successful!') >= 0) {
+                        window.location.href = 'index.html'
+                    }
+                }
+                break
+            default:
+                console.log('Unknown packet type received', packetType)
+                client.write('Unknown packet type received ' + packetType)
+                break
+        }
+    })
 }
 
-connect()
+module.exports.sendActivationMail = function(){
+    return sendActivationMail()
+}
+
+function sendActivationMail(username){
+    if(!username){
+        username = document.getElementById('username').value
+    }
+    superagent.get(`http://localhost:5000/api/activation/${username}`, (err, res) => {
+        let strData = res.text
+        console.log(res.text)
+        let packetType = strData.split('<s>')[0]
+        let params = strData.split('<s>').slice(1, strData.split('<s>').length)
+        console.log(packetType)
+        console.log(params)
+        switch (packetType) {
+            case 'logMessage':
+                if (params[0]) {
+                    let infoMessages = document.getElementById('infoMessages')
+                    let messageElement = infoMessages.getElementsByTagName('p').item(0)
+                    messageElement.innerHTML = params[0]
+                    console.log(messageElement)
+                }
+                break
+            default:
+                console.log('Unknown packet type received', packetType)
+                break
+        }
+    })
+}
